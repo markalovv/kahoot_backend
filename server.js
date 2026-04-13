@@ -36,7 +36,9 @@ app.get('/', (req, res) => {
 })
 
 
-readdirSync('./Routes').map((r) => app.use('/api', require('./Routes/' + r)))
+readdirSync('./Routes')
+    .filter((r) => !r.includes('_opal'))
+    .map((r) => app.use('/api', require('./Routes/' + r)))
 
 const PORT = process.env.PORT || 5555
 
