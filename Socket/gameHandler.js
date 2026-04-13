@@ -1,4 +1,4 @@
-const Quiz = require('../Models/quiz_opal')
+const Quiz = require('../Models/quiz')
 
 // =====================
 // เก็บข้อมูลเกมทั้งหมดไว้ใน memory (RAM)

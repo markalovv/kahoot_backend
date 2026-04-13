@@ -6,15 +6,19 @@ const quizSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    desciption: {
-        type: String
+    description: {
+        // ของเดิมพิมพ์ผิดเป็น "desciption"
+        type: String,
+        default: ''
     },
     creatorId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
+        // ของเดิม ref เป็น 'User' แต่ model ชื่อ 'users' — ตอนนี้ user_opal.js ตั้งชื่อ model เป็น 'User' แล้ว ตรงกัน
         required: true
     },
-    question: [{
+    questions: [{
+        // ของเดิมใช้ชื่อ "question" (เอกพจน์) — เปลี่ยนเป็น "questions" ให้ชัดเจนว่าเป็น array
         questionText: {
             type: String,
             required: true
@@ -25,7 +29,7 @@ const quizSchema = new mongoose.Schema({
             default: 'quiz'
         },
         options: [{
-            text: { type: String, required: true},
+            text: { type: String, required: true },
             isCorrect: { type: Boolean, required: true, default: false }
         }],
         timeLimit: {
@@ -41,10 +45,11 @@ const quizSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    createAt: {
-        type: Date,
-        default: Date.now
+    playCount: {
+        type: Number,
+        default: 0
     }
-})
+}, { timestamps: true })
+// timestamps: true = สร้าง createdAt + updatedAt อัตโนมัติ (แทน createAt ที่ต้องทำเอง)
 
 module.exports = mongoose.model('Quiz', quizSchema)
